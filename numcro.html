@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Numcro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./css/bootstrap.min.css" media="screen">
+    <link rel="stylesheet" href="./css/bootswatch.min.css">
+    <!-- HTML5 shim and Respond.js
+         IE8 support of HTML5 elements and media queries -->
+
+    <!--[if lt IE 9]>
+      <script src="./js/html5shiv.js"></script>
+      <script src="./js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="#" class="navbar-brand">Numcro</a>
+          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+
+        <div class="navbar-collapse collapse" id="navbar-main">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" id="modes" data-toggle="dropdown">Modes <span class="caret"></span></a>
+              <ul class="dropdown-menu" aria-labelledby="modes">
+                <li><a href="numcro.html">ノーマル</a></li>
+              </ul> <!-- EMD: dropdown-menu -->
+            </li>
+          </ul> <!-- EMD: nav navbar-nav -->
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="http://builtwithbootstrap.com/" target="_blank">Built with Bootstrap</a>
+            </li>
+          </ul> <!-- EMD: nav navbar-nav navbar-right -->
+        </div> <!-- END: navbar-header -->
+      </div> <!-- END: container -->
+    </div> <!-- END: navbar -->
+
+    <div class="container">
+      <div class="page-header" id="banner">
+        <div class="row">
+          <div class="col-lg-6">
+            <h1>ナンクロ</h1>
+            <p class="lead">
+              ナンクロを解くためのシートです。<br/>
+              辞書などは今のところ用意されていません。
+            </p>
+          </div> <!-- END: col-lg-6 -->
+          <div class="col-lg-1-offset col-lg-5 pull-right">
+            <form class="well form-inline" id="size">
+              <div class="form-group">
+                <input type="text" name="x"
+                       class="form-control input-sm" placeholder="横幅">
+              </div> <!-- END: form-group -->
+              ×
+              <div class="form-group">
+                <input type="text" name="y"
+                       class="form-control input-sm" placeholder="縦幅">
+              </div> <!-- END: form-group -->
+              <button class="btn btn-primary" id="generate_sheet">
+                シート生成
+              </button>
+            </form> <!-- END: size -->
+          </div> <!-- END: col-lg-6 -->
+        </div> <!-- END: row -->
+      </div> <!-- END: page-header -->
+
+      <div class="row">
+        <div class="col-lg-12">
+          <table class="table table-striped table-hover hidden" name="sheet" >
+            <tbody>
+              <tr>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div> <!-- END: col-lg-12 -->
+      </div> <!-- END: row -->
+
+    </div> <!-- END: container -->
+
+    <script type="text/javascript" src="./js/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./js/bootswatch.js"></script>
+  </body>
+</html>
