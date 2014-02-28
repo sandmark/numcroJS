@@ -56,20 +56,29 @@
             </p>
           </div> <!-- END: col-lg-6 -->
           <div class="col-lg-1-offset col-lg-5 pull-right">
-            <form class="well form-inline" id="size">
-              <div class="form-group">
-                <input type="text" name="x"
-                       class="form-control input-sm" placeholder="横幅">
-              </div> <!-- END: form-group -->
-              ×
-              <div class="form-group">
-                <input type="text" name="y"
-                       class="form-control input-sm" placeholder="縦幅">
-              </div> <!-- END: form-group -->
-              <button class="btn btn-primary" id="generate_sheet">
-                シート生成
-              </button>
-            </form> <!-- END: size -->
+            <div class="well">
+              <form class="form-inline" id="size">
+                <div class="form-group">
+                  <input type="text" name="x"
+                         class="form-control input-sm" placeholder="横幅">
+                </div> <!-- END: form-group -->
+                ×
+                <div class="form-group">
+                  <input type="text" name="y"
+                         class="form-control input-sm" placeholder="縦幅">
+                </div> <!-- END: form-group -->
+                <button class="btn btn-primary" type="submit">
+                  シート生成
+                </button>
+              </form> <!-- END: size -->
+              <ul style="display:none;" id="size_error">
+                <li>
+                  <p class="text-danger">
+                    <b>1</b> 以上の数値を入力してください
+                  </p>
+                </li>
+              </ul> <!-- EMD:  -->
+            </div> <!-- END: well -->
           </div> <!-- END: col-lg-6 -->
         </div> <!-- END: row -->
       </div> <!-- END: page-header -->
@@ -91,5 +100,6 @@
     <script type="text/javascript" src="./js/jquery.min.js"></script>
     <script type="text/javascript" src="./js/bootstrap.min.js"></script>
     <script type="text/javascript" src="./js/bootswatch.js"></script>
+    <script type="text/javascript" src="./js/numcro.js"></script>
   </body>
 </html>
