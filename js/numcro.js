@@ -3,42 +3,11 @@ $(function() {
   $.fn.isVisible = function() {
     return $.expr.filters.visible(this[0]);
   };
-  $.fn.blink = function(speed, count) {
-    if (speed == null) {
-      speed = "fast";
-    }
-    if (count == null) {
-      count = 1;
-    }
-    if ($(this).isVisible()) {
-      if (count === 0) {
-        return false;
-      } else {
-        return $(this).fadeOut(speed, function() {
-          return $(this).fadeIn(speed, function() {
-            return $(this).blink(speed, count - 1);
-          });
-        });
-      }
-    }
-  };
-  $.fn.highlight = function() {
-    if ($(this).isVisible()) {
-      return $(this).blink();
-    } else {
-      return $(this).show("fast");
-    }
-  };
-  return $("#size").submit(function() {
-    var msg, x, y;
-    x = Number($("#size [name=x]").val());
-    y = Number($("#size [name=y]").val());
-    msg = $("#size_error");
-    if (isNaN(x) || isNaN(y) || x <= 0 || y <= 0) {
-      msg.highlight();
-    } else {
-      alert($.type(x) + ("" + x));
-    }
+  return $.fn.createSheet = function() {
+    var x, y;
+    x = $(this).find("[name=x]").val();
+    y = $(this).find("[name=y]").val();
+    console.log("X = " + x + ", Y = " + y);
     return false;
-  });
+  };
 });

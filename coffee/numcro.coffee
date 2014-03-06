@@ -1,25 +1,17 @@
 $ ->
+  # --------------------------------------------------
+  # Function: isVisible
+  #   returns which element is visible or invisibile
+  #
   $.fn.isVisible = ->
     $.expr.filters.visible this[0]
 
-  $.fn.blink = (speed = "fast", count = 1) ->
-    if $(this).isVisible()
-      if count == 0
-        return false
-      else
-        $(this).fadeOut speed, ->
-          $(this).fadeIn speed, ->
-            $(this).blink speed, count-1
-
-  $.fn.highlight = ->
-    if $(this).isVisible() then $(this).blink() else $(this).show("fast")
-
-  $("#size").submit ->
-    x = Number $("#size [name=x]").val()
-    y = Number $("#size [name=y]").val()
-    msg = $("#size_error")
-    if isNaN(x) or isNaN(y) or x <= 0 or y <= 0
-      msg.highlight()
-    else
-      alert $.type(x) + "#{x}"
+  # --------------------------------------------------
+  # Function: createSheet
+  #   creates a sheet has size X and Y
+  #
+  $.fn.createSheet = ->
+    x = $(this).find("[name=x]").val()
+    y = $(this).find("[name=y]").val()
+    console.log "X = #{x}, Y = #{y}"
     false
