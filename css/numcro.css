@@ -1,5 +1,13 @@
-.center-table
-{
-  margin: 0 auto !important;
-  float: none !important;
+.center-table {
+    margin: 0 auto !important;
+    float: none !important;
+}
+
+.table-sheet td {
+    padding: 1px !important;
+}
+
+.table-sheet input {
+    height: 2em;
+    width:  2em;
 }

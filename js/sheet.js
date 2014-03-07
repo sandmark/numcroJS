@@ -40,7 +40,7 @@ $(function() {
     }
   };
   return $.fn.createSheet = function() {
-    var col, row, sheet, tbody, tr, x, y, _i, _j;
+    var col, input, row, sheet, tbody, td, tr, x, y, _i, _j;
     sheet = $("#sheet");
     tbody = sheet.find("tbody");
     if (tbody.children().length > 0) {
@@ -48,17 +48,22 @@ $(function() {
     } else {
       x = $(this).find("[name=x]").val();
       y = $(this).find("[name=y]").val();
+      input = "<input type=\"text\" autocomplete=\"off\" class=\"text-center\">";
       for (row = _i = 0; _i < y; row = _i += 1) {
         tr = $("<tr>");
         for (col = _j = 0; _j < x; col = _j += 1) {
-          tr.append($("<td><input type='text'></td>"));
+          td = $("<td class='text-center'>");
+          td.append($(input));
+          tr.append(td);
         }
         tbody.append(tr);
       }
       sheet.animate({
         height: "toggle",
         opacity: "toggle"
-      }, "slow");
+      }, "slow", function() {
+        return $(this).find("input")[0].focus();
+      });
     }
     return false;
   };
