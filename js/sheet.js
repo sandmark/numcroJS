@@ -41,7 +41,6 @@ $(function() {
     var col, row, sheet, tbody, tr, x, y, _i, _j;
     sheet = $("#sheet");
     tbody = sheet.find("tbody");
-    console.log(tbody.children().length);
     if (tbody.children().length > 0) {
       $("#sheet_generated").showError();
     } else {
