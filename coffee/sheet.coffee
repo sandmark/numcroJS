@@ -17,7 +17,11 @@ $ ->
     },
 
     submitHandler: (form) ->
+      $("#size_error").hide("fast")
       $(form).createSheet()
+
+    invalidHandler: (form, validator) ->
+      $("#size_error").showError()
 
     errorClass: "has-error",
     validClass: "has-success",
@@ -26,10 +30,8 @@ $ ->
 
     highlight: (element, errorClass) ->
       $(element).parent().addClass errorClass
-      $("#size_error").showError()
 
     unhighlight: (element, errorClass) ->
-      $("#size_error").hide("fast")
       $(element).parent().removeClass(errorClass).addClass("has-success")
   }
 

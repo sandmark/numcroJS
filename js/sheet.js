@@ -14,17 +14,19 @@ $(function() {
       }
     },
     submitHandler: function(form) {
+      $("#size_error").hide("fast");
       return $(form).createSheet();
+    },
+    invalidHandler: function(form, validator) {
+      return $("#size_error").showError();
     },
     errorClass: "has-error",
     validClass: "has-success",
     errorPlacement: function(error, element) {},
     highlight: function(element, errorClass) {
-      $(element).parent().addClass(errorClass);
-      return $("#size_error").showError();
+      return $(element).parent().addClass(errorClass);
     },
     unhighlight: function(element, errorClass) {
-      $("#size_error").hide("fast");
       return $(element).parent().removeClass(errorClass).addClass("has-success");
     }
   });
