@@ -65,18 +65,39 @@ $(function() {
       }, "slow", function() {
         return $(this).find("input")[0].focus();
       });
-      sheet.registerKeys().registerValidation();
+      sheet.registerKeys();
     }
     return false;
   };
   $.fn.registerKeys = function() {
-    return $(this).find("input").keyup(function(e) {
-      var keyEnter;
+    return $(this).find("input").keypress(function(e) {
+      var code, keyEnter;
       keyEnter = 13;
-      if (e.keyCode === keyEnter) {
-        return $(":input:eq(" + ($(':input').index(this) + 1) + ")").focus();
+      code = e.keyCode || e.which;
+      if (code === keyEnter) {
+        $(":input:eq(" + ($(':input').index(this) + 1) + ")").focus();
+        return false;
       }
     });
   };
-  return $.fn.registerValidation = function() {};
+  return $("#sheet").submit(function() {
+    var e, height, n, ruby, width, _i, _len, _ref;
+    _ref = $(this).find("input");
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      e = _ref[_i];
+      e = $(e);
+      n = Number(e.val());
+      width = e.parent().width();
+      height = e.parent().height();
+      e.parent().width(width);
+      e.parent().height(height);
+      if (isNaN(n) || n === 0) {
+        e.parent().addClass("cell-block").end().remove();
+      } else {
+        ruby = $("<ruby>　<rt>" + n + "</rt></ruby>");
+        e.replaceWith(ruby);
+      }
+    }
+    return false;
+  });
 });

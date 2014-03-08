@@ -11,3 +11,7 @@
     height: 2em;
     width:  2em;
 }
+
+.table-sheet td.cell-block {
+    background-color: #000000 !important;
+}

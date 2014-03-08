@@ -72,21 +72,35 @@ $ ->
 
       sheet.animate {height: "toggle", opacity: "toggle"}, "slow", ->
         $(this).find("input")[0].focus()
-      sheet.registerKeys().registerValidation()
+      sheet.registerKeys()
     false
 
   # --------------------------------------------------
   # Function: registerKeys
-  #   Register key events
+  #   Register key events from Enter to Tab
   #
   $.fn.registerKeys = ->
-    $(this).find("input").keyup (e) ->
+    $(this).find("input").keypress (e) ->
       keyEnter = 13
-      if e.keyCode is keyEnter
+      code = e.keyCode or e.which
+      if code is keyEnter
         $(":input:eq(#{$(':input').index(this)+1})").focus()
+        false
 
   # --------------------------------------------------
-  # Function: registerValidation
-  #   Register validation for sheet
+  # Base sheet submit
   #
-  $.fn.registerValidation = ->
+  $("#sheet").submit ->
+    for e in $(this).find("input")
+      e = $(e)
+      n = Number(e.val())
+      width = e.parent().width()
+      height= e.parent().height()
+      e.parent().width(width)
+      e.parent().height(height)
+      if isNaN(n) or n is 0
+        e.parent().addClass("cell-block").end().remove()
+      else
+        ruby = $("<ruby>　<rt>#{n}</rt></ruby>")
+        e.replaceWith(ruby)
+    false
