@@ -72,4 +72,21 @@ $ ->
 
       sheet.animate {height: "toggle", opacity: "toggle"}, "slow", ->
         $(this).find("input")[0].focus()
+      sheet.registerKeys().registerValidation()
     false
+
+  # --------------------------------------------------
+  # Function: registerKeys
+  #   Register key events
+  #
+  $.fn.registerKeys = ->
+    $(this).find("input").keyup (e) ->
+      keyEnter = 13
+      if e.keyCode is keyEnter
+        $(":input:eq(#{$(':input').index(this)+1})").focus()
+
+  # --------------------------------------------------
+  # Function: registerValidation
+  #   Register validation for sheet
+  #
+  $.fn.registerValidation = ->

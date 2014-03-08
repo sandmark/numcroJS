@@ -39,7 +39,7 @@ $(function() {
       return $(this).show("fast");
     }
   };
-  return $.fn.createSheet = function() {
+  $.fn.createSheet = function() {
     var col, input, row, sheet, tbody, td, tr, x, y, _i, _j;
     sheet = $("#sheet");
     tbody = sheet.find("tbody");
@@ -65,7 +65,18 @@ $(function() {
       }, "slow", function() {
         return $(this).find("input")[0].focus();
       });
+      sheet.registerKeys().registerValidation();
     }
     return false;
   };
+  $.fn.registerKeys = function() {
+    return $(this).find("input").keyup(function(e) {
+      var keyEnter;
+      keyEnter = 13;
+      if (e.keyCode === keyEnter) {
+        return $(":input:eq(" + ($(':input').index(this) + 1) + ")").focus();
+      }
+    });
+  };
+  return $.fn.registerValidation = function() {};
 });
