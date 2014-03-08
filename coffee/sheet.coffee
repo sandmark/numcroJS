@@ -88,11 +88,12 @@ $ ->
         false
 
   # --------------------------------------------------
-  # Base sheet submit
+  # Submit override of Base sheet
   #
   $("#sheet").submit ->
-    for e in $(this).find("input")
-      e = $(e)
+    $(this).find("button").hide("slow")
+    $(this).find("input").each ->
+      e = $(this)
       n = Number(e.val())
       width = e.parent().width()
       height= e.parent().height()
@@ -101,6 +102,7 @@ $ ->
       if isNaN(n) or n is 0
         e.parent().addClass("cell-block").end().remove()
       else
-        ruby = $("<ruby>　<rt>#{n}</rt></ruby>")
-        e.replaceWith(ruby)
+        input = "<input placeholder='#{n}' type='text' autocomplete='off' class='text-center'>"
+        e.replaceWith(input)
+    $(this).registerKeys()
     false

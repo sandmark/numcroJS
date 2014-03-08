@@ -81,23 +81,23 @@ $(function() {
     });
   };
   return $("#sheet").submit(function() {
-    var e, height, n, ruby, width, _i, _len, _ref;
-    _ref = $(this).find("input");
-    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-      e = _ref[_i];
-      e = $(e);
+    $(this).find("button").hide("slow");
+    $(this).find("input").each(function() {
+      var e, height, input, n, width;
+      e = $(this);
       n = Number(e.val());
       width = e.parent().width();
       height = e.parent().height();
       e.parent().width(width);
       e.parent().height(height);
       if (isNaN(n) || n === 0) {
-        e.parent().addClass("cell-block").end().remove();
+        return e.parent().addClass("cell-block").end().remove();
       } else {
-        ruby = $("<ruby>　<rt>" + n + "</rt></ruby>");
-        e.replaceWith(ruby);
+        input = "<input placeholder='" + n + "' type='text' autocomplete='off' class='text-center'>";
+        return e.replaceWith(input);
       }
-    }
+    });
+    $(this).registerKeys();
     return false;
   });
 });
