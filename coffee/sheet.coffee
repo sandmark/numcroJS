@@ -72,15 +72,19 @@ $ ->
   #
   $.fn.createAnswer = ->
     answer = $("#answer")
-    tr = answer.find("tr")
-    for i in [0..$(this).length]
-      input = $("<input type='text' autocomplete='off' class='text-center'>")
-      td    = $("<td class='text-center'>")
-      td.append(input)
-      tr.prepend(td)
-    answer.animate {height: "toggle", opacity: "toggle"}, "slow", ->
-      answer.find("input")[0].focus()
-    false
+    if answer.find("input").length > 0
+      $("#answerAlreadyExistsError").showError()
+      false
+    else
+      tr = answer.find("tr")
+      for i in [0..$(this).length]
+        input = $("<input type='text' autocomplete='off' class='text-center'>")
+        td    = $("<td class='text-center'>")
+        td.append(input)
+        tr.prepend(td)
+      answer.animate {height: "toggle", opacity: "toggle"}, "slow", ->
+        answer.find("input")[0].focus()
+      false
 
   # --------------------------------------------------
   # Function: showError

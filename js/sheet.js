@@ -58,20 +58,25 @@ $(function() {
   $.fn.createAnswer = function() {
     var answer, i, input, td, tr, _i, _ref;
     answer = $("#answer");
-    tr = answer.find("tr");
-    for (i = _i = 0, _ref = $(this).length; 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) {
-      input = $("<input type='text' autocomplete='off' class='text-center'>");
-      td = $("<td class='text-center'>");
-      td.append(input);
-      tr.prepend(td);
+    if (answer.find("input").length > 0) {
+      $("#answerAlreadyExistsError").showError();
+      return false;
+    } else {
+      tr = answer.find("tr");
+      for (i = _i = 0, _ref = $(this).length; 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) {
+        input = $("<input type='text' autocomplete='off' class='text-center'>");
+        td = $("<td class='text-center'>");
+        td.append(input);
+        tr.prepend(td);
+      }
+      answer.animate({
+        height: "toggle",
+        opacity: "toggle"
+      }, "slow", function() {
+        return answer.find("input")[0].focus();
+      });
+      return false;
     }
-    answer.animate({
-      height: "toggle",
-      opacity: "toggle"
-    }, "slow", function() {
-      return answer.find("input")[0].focus();
-    });
-    return false;
   };
   $.fn.showError = function() {
     if ($(this).isVisible()) {
