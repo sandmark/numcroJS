@@ -57,39 +57,56 @@
               辞書などは今のところ用意されていません。
             </p>
           </div> <!-- END: col-lg-6 -->
-          <div class="col-lg-2-offset col-lg-4 pull-right">
-            <div class="well">
-              <div class="row">
-                <div class="col-lg-12">
-                  <form class="form-inline pull-right" id="size">
-                    <div class="form-group">
-                      <input type="text" name="x" autofocus autocomplete="off"
-                             class="form-control input-sm" size="2"
-                             placeholder="横幅">
-                    </div> <!-- END: form-group -->
-                    ×
-                    <div class="form-group">
-                      <input type="text" name="y" autocomplete="off" size="2"
-                             class="form-control input-sm" placeholder="縦幅">
-                    </div> <!-- END: form-group -->
-                    <button class="btn btn-primary btn-sm" type="submit">
-                      生成
-                    </button>
-                  </form> <!-- END: size -->
-                  <div style="display:none;" id="size_error">
-                    <p class="text-danger" name="message">
-                      <b>1</b> 以上の数値を入力してください
-                    </p>
-                  </div>
 
-                  <div style="display:none;" id="sheet_generated">
-                    <p class="text-danger" name="message">
-                      既にシートが生成されています
-                    </p>
-                  </div>
-                </div> <!-- END: col-lg-12 -->
-              </div> <!-- END: row -->
-            </div> <!-- END: well -->
+          <div class="col-lg-2-offset col-lg-4 pull-right">
+            <div class="row">
+              <div class="col-lg-12 well">
+                <form class="form-inline pull-right" id="size">
+                  <div class="form-group">
+                    <input type="text" name="x" autofocus
+                           autocomplete="off"
+                           class="form-control input-sm" size="2"
+                           placeholder="横幅">
+                  </div> <!-- END: form-group -->
+                  ×
+                  <div class="form-group">
+                    <input type="text" name="y" autocomplete="off"
+                           class="form-control input-sm" size="2"
+                           placeholder="縦幅">
+                  </div> <!-- END: form-group -->
+                  <button class="btn btn-primary btn-sm" type="submit">
+                    生成
+                  </button>
+                </form> <!-- END: size -->
+                <div style="display:none;" id="size_error">
+                          <p class="text-danger" name="message">
+                            <b>1</b> 以上の数値を入力してください
+                      </p>
+                    </div>
+
+<div style="display:none;" id="sheet_generated">
+                          <p class="text-danger" name="message">
+                            既にシートが生成されています
+                      </p>
+                    </div>
+              </div> <!-- END: col-lg-12 -->
+            </div> <!-- END: row -->
+
+            <div class="row">
+              <div class="col-lg-12 well">
+                <form class="form-inline pull-right" id="answerForm">
+                  <div class="form-group">
+                    <input type="text" name="length"
+                           class="form-control input-sm"
+                           placeholder="答えの長さ">
+                  </div> <!-- END: length -->
+                  <button class="btn btn-primary btn-sm" type="submit">
+                    生成
+                  </button>
+                </form>
+              </div> <!-- END: col-lg-12 well -->
+            </div> <!-- END: row -->
+
           </div> <!-- END: col-lg-6 -->
         </div> <!-- END: row -->
       </div> <!-- END: page-header -->
@@ -104,6 +121,25 @@
             </li>
           </ul>
         </div> <!-- END: col-lg-6 -->
+      </div> <!-- END: row -->
+
+      <div class="row">
+        <form id="answer" class="form-inline" style="display:none;">
+          <div class="col-lg-12">
+            <table class="table table-condensed table-bordered"
+                   style="width:0%;">
+              <tbody>
+                <tr>
+                  <td id="answerConvert">
+                    <button class="btn btn-xs btn-primary" type="submit">
+                      変換
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div> <!-- END: col-lg-12 -->
+        </form>
       </div> <!-- END: row -->
 
       <div class="row">
