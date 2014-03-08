@@ -30,6 +30,49 @@ $(function() {
       return $(element).parent().removeClass(errorClass).addClass("has-success");
     }
   });
+  $("#answerForm").validate({
+    rules: {
+      length: {
+        required: true,
+        digits: true,
+        min: 1
+      }
+    },
+    submitHandler: function(form) {
+      $("#answer_error").hide("fast");
+      return $(form).createAnswer();
+    },
+    invalidHandler: function(form, validator) {
+      return $("#answer_error").showError();
+    },
+    errorClass: "has-error",
+    validClass: "has-success",
+    errorPlacement: function(error, element) {},
+    highlight: function(element, errorClass) {
+      return $(element).parent().addClass(errorClass);
+    },
+    unhighlight: function(element, errorClass) {
+      return $(element).parent().removeClass(errorClass).addClass("has-success");
+    }
+  });
+  $.fn.createAnswer = function() {
+    var answer, i, input, td, tr, _i, _ref;
+    answer = $("#answer");
+    tr = answer.find("tr");
+    for (i = _i = 0, _ref = $(this).length; 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) {
+      input = $("<input type='text' autocomplete='off' class='text-center'>");
+      td = $("<td class='text-center'>");
+      td.append(input);
+      tr.prepend(td);
+    }
+    answer.animate({
+      height: "toggle",
+      opacity: "toggle"
+    }, "slow", function() {
+      return answer.find("input")[0].focus();
+    });
+    return false;
+  };
   $.fn.showError = function() {
     if ($(this).isVisible()) {
       return $(this).find("p[name=message]").fadeOut("fast", function() {
@@ -63,24 +106,29 @@ $(function() {
         height: "toggle",
         opacity: "toggle"
       }, "slow", function() {
-        return $(this).find("input")[0].focus();
+        if (!$("#answer").isVisible()) {
+          $("#answerInvisibleError").showError();
+          return $("#answerForm").find("input")[0].focus();
+        } else {
+          $(this).find("input")[0].focus();
+          return sheet.registerKeys();
+        }
       });
-      sheet.registerKeys();
     }
     return false;
   };
   $.fn.registerKeys = function() {
-    return $(this).find("input").keypress(function(e) {
+    $(this).find("input").keypress(function(e) {
       var code, keyEnter;
       keyEnter = 13;
       code = e.keyCode || e.which;
       if (code === keyEnter) {
-        $(":input:eq(" + ($(':input').index(this) + 1) + ")").focus();
-        return false;
+        return $(":input:eq(" + ($(':input').index(this) + 1) + ")").focus();
       }
     });
+    return $(this);
   };
-  return $("#sheet").submit(function() {
+  $("#sheet").submit(function() {
     $(this).find("button").hide("slow");
     $(this).find("input").each(function() {
       var e, height, input, n, width;
@@ -97,7 +145,8 @@ $(function() {
         return e.replaceWith(input);
       }
     });
-    $(this).registerKeys();
+    $(this).registerKeys().registerSync();
     return false;
   });
+  return $.fn.registerSync = function() {};
 });

@@ -36,6 +36,53 @@ $ ->
   }
 
   # --------------------------------------------------
+  # Validation of answerForm
+  #
+  $("#answerForm").validate {
+    rules: {
+      length: {
+        required: true,
+        digits: true,
+        min: 1
+      }
+    },
+
+    submitHandler: (form) ->
+      $("#answer_error").hide("fast")
+      $(form).createAnswer()
+
+    invalidHandler: (form, validator) ->
+      $("#answer_error").showError()
+
+    errorClass: "has-error",
+    validClass: "has-success",
+
+    errorPlacement: (error, element) ->
+
+    highlight: (element, errorClass) ->
+      $(element).parent().addClass errorClass
+
+    unhighlight: (element, errorClass) ->
+      $(element).parent().removeClass(errorClass).addClass("has-success")
+  }
+
+  # --------------------------------------------------
+  # Function: createAnswer
+  #   creates answer table depending length of answerForm
+  #
+  $.fn.createAnswer = ->
+    answer = $("#answer")
+    tr = answer.find("tr")
+    for i in [0..$(this).length]
+      input = $("<input type='text' autocomplete='off' class='text-center'>")
+      td    = $("<td class='text-center'>")
+      td.append(input)
+      tr.prepend(td)
+    answer.animate {height: "toggle", opacity: "toggle"}, "slow", ->
+      answer.find("input")[0].focus()
+    false
+
+  # --------------------------------------------------
   # Function: showError
   #   show or blink error message
   #
@@ -71,8 +118,12 @@ $ ->
         tbody.append(tr)
 
       sheet.animate {height: "toggle", opacity: "toggle"}, "slow", ->
-        $(this).find("input")[0].focus()
-      sheet.registerKeys()
+        if not $("#answer").isVisible()
+          $("#answerInvisibleError").showError()
+          $("#answerForm").find("input")[0].focus()
+        else
+          $(this).find("input")[0].focus()
+          sheet.registerKeys()
     false
 
   # --------------------------------------------------
@@ -85,7 +136,7 @@ $ ->
       code = e.keyCode or e.which
       if code is keyEnter
         $(":input:eq(#{$(':input').index(this)+1})").focus()
-        false
+    $(this)
 
   # --------------------------------------------------
   # Submit override of Base sheet
@@ -104,5 +155,11 @@ $ ->
       else
         input = "<input placeholder='#{n}' type='text' autocomplete='off' class='text-center'>"
         e.replaceWith(input)
-    $(this).registerKeys()
+    $(this).registerKeys().registerSync()
     false
+
+  # --------------------------------------------------
+  # Function: registerSync
+  #   Synchronize characters in same numbers
+  #
+  $.fn.registerSync = ->

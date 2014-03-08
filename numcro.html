@@ -79,24 +79,32 @@
                   </button>
                 </form> <!-- END: size -->
                 <div style="display:none;" id="size_error">
-                          <p class="text-danger" name="message">
-                            <b>1</b> 以上の数値を入力してください
-                      </p>
-                    </div>
+                  <p class="text-danger" name="message">
+                    <b>1</b> 以上の数値を入力してください
+                  </p>
+                </div>
 
-<div style="display:none;" id="sheet_generated">
-                          <p class="text-danger" name="message">
-                            既にシートが生成されています
-                      </p>
-                    </div>
+                <div style="display:none;" id="sheet_generated">
+                  <p class="text-danger" name="message">
+                    既にシートが生成されています
+                  </p>
+                </div>
+
+                <div id="answerInvisibleError" style="display:none;">
+                  <p class="text-danger" name="message">
+                    答えを生成してください
+                  </p>
+                </div>
+
               </div> <!-- END: col-lg-12 -->
             </div> <!-- END: row -->
 
             <div class="row">
               <div class="col-lg-12 well">
                 <form class="form-inline pull-right" id="answerForm">
+
                   <div class="form-group">
-                    <input type="text" name="length"
+                    <input type="text" name="length" autocomplete="off"
                            class="form-control input-sm"
                            placeholder="答えの文字数">
                   </div> <!-- END: length -->
@@ -104,6 +112,12 @@
                     生成
                   </button>
                 </form>
+
+                <div id="answer_error" style="display:none;">
+                  <p name="message" class="text-danger">
+                    <b>1</b> 以上の整数を入力してください
+                  </p>
+                </div> <!-- END:  -->
               </div> <!-- END: col-lg-12 well -->
             </div> <!-- END: row -->
 
@@ -126,12 +140,12 @@
       <div class="row">
         <form id="answer" class="form-inline" style="display:none;">
           <div class="col-lg-12">
-            <table class="table table-condensed table-bordered"
+            <table class="table table-condensed table-bordered table-sheet"
                    style="width:0%;">
               <tbody>
                 <tr>
                   <td id="answerConvert">
-                    <button class="btn btn-xs btn-primary" type="submit">
+                    <button class="btn btn-sm btn-primary" type="submit">
                       変換
                     </button>
                   </td>
