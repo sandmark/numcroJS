@@ -45,10 +45,11 @@ $(function() {
     tbody = sheet.find("tbody");
     if (tbody.children().length > 0) {
       $("#sheet_generated").showError();
+      sheet.find("input")[0].focus();
     } else {
       x = $(this).find("[name=x]").val();
       y = $(this).find("[name=y]").val();
-      input = "<input type=\"text\" autocomplete=\"off\" class=\"text-center\">";
+      input = '<input type="text" autocomplete="off" class="text-center">';
       for (row = _i = 0; _i < y; row = _i += 1) {
         tr = $("<tr>");
         for (col = _j = 0; _j < x; col = _j += 1) {

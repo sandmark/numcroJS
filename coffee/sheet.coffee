@@ -56,16 +56,16 @@ $ ->
 
     if tbody.children().length > 0
       $("#sheet_generated").showError()
+      sheet.find("input")[0].focus()
     else
       x = $(this).find("[name=x]").val()
       y = $(this).find("[name=y]").val()
 
-      input = """<input type="text" autocomplete="off" class="text-center">
-"""
+      input = '<input type="text" autocomplete="off" class="text-center">'
       for row in [0...y] by 1
         tr = $("<tr>")
         for col in [0...x] by 1
-          td =  $("<td class='text-center'>")
+          td = $("<td class='text-center'>")
           td.append($(input))
           tr.append(td)
         tbody.append(tr)
