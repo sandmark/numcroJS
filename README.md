@@ -1,7 +1,9 @@
 ##NumCro
 #####Table of Contents
 [About](#about)
+
 [How to use](#howto)
+
 [Changelog](#changelog)
 
 <a name"about" />
