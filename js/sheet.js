@@ -177,6 +177,22 @@ $(function() {
     return false;
   });
   return $.fn.registerSync = function() {
-    return $(this).find("input").change(function() {});
+    var elements, target;
+    elements = $(this).find("input");
+    target = $("#answer,#sheet");
+    elements.change(function() {
+      var cell, char, n, _i, _len, _ref;
+      n = $(this).attr("placeholder");
+      char = $(this).val();
+      _ref = target.find("input[placeholder=" + n + "]");
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        cell = _ref[_i];
+        if ($(cell).val() === "") {
+          $(cell).sendkeys(char);
+        }
+      }
+      return $(this).focus();
+    });
+    return $(this);
   };
 });
