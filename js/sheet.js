@@ -133,9 +133,8 @@ $(function() {
       }
     });
   };
-  $("#sheet").submit(function() {
-    $(this).find("button").hide("slow");
-    $(this).find("input").each(function() {
+  $.fn.convert = function() {
+    return $(this).find("input").each(function() {
       var e, height, input, n, width;
       e = $(this);
       n = Number(e.val());
@@ -150,7 +149,9 @@ $(function() {
         return e.replaceWith(input);
       }
     });
-    $(this).registerSync();
+  };
+  $("#sheet").submit(function() {
+    $(this).find("button").hide("slow").end().convert().registerKeys().registerSync();
     return false;
   });
   return $.fn.registerSync = function() {};

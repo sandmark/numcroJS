@@ -143,10 +143,10 @@ $ ->
         false
 
   # --------------------------------------------------
-  # Override submit of Base sheet
+  # Function: convert
+  #   Convert from base sheet to NumCro sheet
   #
-  $("#sheet").submit ->
-    $(this).find("button").hide("slow")
+  $.fn.convert = ->
     $(this).find("input").each ->
       e = $(this)
       n = Number(e.val())
@@ -159,7 +159,13 @@ $ ->
       else
         input = "<input placeholder='#{n}' type='text' autocomplete='off' class='text-center'>"
         e.replaceWith(input)
-    $(this).registerSync()
+
+  # --------------------------------------------------
+  # Override submit of Base sheet
+  #
+  $("#sheet").submit ->
+    $(this).find("button").hide("slow").end().convert().
+      registerKeys().registerSync()
     false
 
   # --------------------------------------------------
