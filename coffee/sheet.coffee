@@ -177,6 +177,7 @@ $ ->
       error.hide("fast")
       $(this).find("button").parent().remove()
       $(this).convert().registerKeys().registerSync()
+      $("#sheet").find("input")[0].focus()
     else
       invalidCell.focus()
       error.showError()
@@ -187,7 +188,7 @@ $ ->
   #
   $("#sheet").submit ->
     $(this).find("button").hide("slow").end().convert().
-      registerKeys().registerSync()
+      registerKeys().registerSync().find("input")[0].focus()
     false
 
   # --------------------------------------------------

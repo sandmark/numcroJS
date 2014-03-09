@@ -167,6 +167,7 @@ $(function() {
       error.hide("fast");
       $(this).find("button").parent().remove();
       $(this).convert().registerKeys().registerSync();
+      $("#sheet").find("input")[0].focus();
     } else {
       invalidCell.focus();
       error.showError();
@@ -174,7 +175,7 @@ $(function() {
     return false;
   });
   $("#sheet").submit(function() {
-    $(this).find("button").hide("slow").end().convert().registerKeys().registerSync();
+    $(this).find("button").hide("slow").end().convert().registerKeys().registerSync().find("input")[0].focus();
     return false;
   });
   return $.fn.registerSync = function() {
