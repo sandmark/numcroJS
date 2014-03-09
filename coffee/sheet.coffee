@@ -76,7 +76,7 @@ $ ->
       $("#answerAlreadyExistsError").showError()
     else
       tr = answer.find("tr")
-      for i in [0..$(this).length]
+      for i in [0..$(this).find("input[name=length]").val()]
         input = $("<input type='text' autocomplete='off' class='text-center'>")
         td    = $("<td class='text-center'>")
         td.append(input)

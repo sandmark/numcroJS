@@ -62,7 +62,7 @@ $(function() {
       $("#answerAlreadyExistsError").showError();
     } else {
       tr = answer.find("tr");
-      for (i = _i = 0, _ref = $(this).length; 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) {
+      for (i = _i = 0, _ref = $(this).find("input[name=length]").val(); 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) {
         input = $("<input type='text' autocomplete='off' class='text-center'>");
         td = $("<td class='text-center'>");
         td.append(input);
