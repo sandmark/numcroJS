@@ -152,19 +152,20 @@ $(function() {
     });
   };
   $("#answer").submit(function() {
-    var allNumber, error;
-    allNumber = true;
+    var error, invalidCell;
+    invalidCell = false;
     error = $("#notAllNumberError");
     $(this).find("input").each(function() {
-      if (!($(this).val() > 0 && allNumber)) {
-        return allNumber = false;
+      if (!($(this).val() > 0)) {
+        return invalidCell = $(this);
       }
     });
-    if (allNumber) {
+    if (!invalidCell) {
       error.hide("fast");
       $(this).find("button").parent().remove();
       $(this).convert().registerKeys().registerSync();
     } else {
+      invalidCell.focus();
       error.showError();
     }
     return false;

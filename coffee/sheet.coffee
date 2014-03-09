@@ -165,16 +165,17 @@ $ ->
   # Override submit of Base answer table
   #
   $("#answer").submit ->
-    allNumber = true
+    invalidCell = false
     error = $("#notAllNumberError")
     $(this).find("input").each ->
-      unless $(this).val() > 0 and allNumber
-        allNumber = false
-    if allNumber
+      unless $(this).val() > 0
+        invalidCell = $(this)
+    if not invalidCell
       error.hide("fast")
       $(this).find("button").parent().remove()
       $(this).convert().registerKeys().registerSync()
     else
+      invalidCell.focus()
       error.showError()
     false
 
