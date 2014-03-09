@@ -74,7 +74,6 @@ $ ->
     answer = $("#answer")
     if answer.find("input").length > 0
       $("#answerAlreadyExistsError").showError()
-      false
     else
       tr = answer.find("tr")
       for i in [0..$(this).length]
@@ -84,7 +83,8 @@ $ ->
         tr.prepend(td)
       answer.animate {height: "toggle", opacity: "toggle"}, "slow", ->
         answer.find("input")[0].focus()
-      false
+        answer.registerKeys()
+    false
 
   # --------------------------------------------------
   # Function: showError
@@ -132,7 +132,7 @@ $ ->
 
   # --------------------------------------------------
   # Function: registerKeys
-  #   Register key events from Enter to Tab
+  #   Register key events: focus to next field when Enter pressed
   #
   $.fn.registerKeys = ->
     $(this).find("input").keypress (e) ->
@@ -140,10 +140,10 @@ $ ->
       code = e.keyCode or e.which
       if code is keyEnter
         $(":input:eq(#{$(':input').index(this)+1})").focus()
-    $(this)
+        false
 
   # --------------------------------------------------
-  # Submit override of Base sheet
+  # Override submit of Base sheet
   #
   $("#sheet").submit ->
     $(this).find("button").hide("slow")
@@ -159,7 +159,7 @@ $ ->
       else
         input = "<input placeholder='#{n}' type='text' autocomplete='off' class='text-center'>"
         e.replaceWith(input)
-    $(this).registerKeys().registerSync()
+    $(this).registerSync()
     false
 
   # --------------------------------------------------

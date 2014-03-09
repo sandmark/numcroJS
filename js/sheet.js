@@ -60,7 +60,6 @@ $(function() {
     answer = $("#answer");
     if (answer.find("input").length > 0) {
       $("#answerAlreadyExistsError").showError();
-      return false;
     } else {
       tr = answer.find("tr");
       for (i = _i = 0, _ref = $(this).length; 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) {
@@ -73,10 +72,11 @@ $(function() {
         height: "toggle",
         opacity: "toggle"
       }, "slow", function() {
-        return answer.find("input")[0].focus();
+        answer.find("input")[0].focus();
+        return answer.registerKeys();
       });
-      return false;
     }
+    return false;
   };
   $.fn.showError = function() {
     if ($(this).isVisible()) {
@@ -123,15 +123,15 @@ $(function() {
     return false;
   };
   $.fn.registerKeys = function() {
-    $(this).find("input").keypress(function(e) {
+    return $(this).find("input").keypress(function(e) {
       var code, keyEnter;
       keyEnter = 13;
       code = e.keyCode || e.which;
       if (code === keyEnter) {
-        return $(":input:eq(" + ($(':input').index(this) + 1) + ")").focus();
+        $(":input:eq(" + ($(':input').index(this) + 1) + ")").focus();
+        return false;
       }
     });
-    return $(this);
   };
   $("#sheet").submit(function() {
     $(this).find("button").hide("slow");
@@ -150,7 +150,7 @@ $(function() {
         return e.replaceWith(input);
       }
     });
-    $(this).registerKeys().registerSync();
+    $(this).registerSync();
     return false;
   });
   return $.fn.registerSync = function() {};
