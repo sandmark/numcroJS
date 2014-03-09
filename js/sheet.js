@@ -61,6 +61,7 @@ $(function() {
     if (answer.find("input").length > 0) {
       $("#answerAlreadyExistsError").showError();
     } else {
+      $("#answerInvisibleError").hide("slow");
       tr = answer.find("tr");
       for (i = _i = 0, _ref = $(this).find("input[name=length]").val(); 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) {
         input = $("<input type='text' autocomplete='off' class='text-center'>");

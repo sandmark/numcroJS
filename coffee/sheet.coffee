@@ -75,6 +75,7 @@ $ ->
     if answer.find("input").length > 0
       $("#answerAlreadyExistsError").showError()
     else
+      $("#answerInvisibleError").hide("slow")
       tr = answer.find("tr")
       for i in [0..$(this).find("input[name=length]").val()]
         input = $("<input type='text' autocomplete='off' class='text-center'>")
