@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
   <head>
     <meta charset="utf-8">
     <title>Numcro</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="./css/bootstrap.min.css" media="screen">
     <link rel="stylesheet" href="./css/bootswatch.min.css">
+    <link rel="stylesheet" href="./css/numcro.css">
+
     <!-- HTML5 shim and Respond.js
          IE8 support of HTML5 elements and media queries -->
 
@@ -55,44 +57,134 @@
               辞書などは今のところ用意されていません。
             </p>
           </div> <!-- END: col-lg-6 -->
-          <div class="col-lg-1-offset col-lg-5 pull-right">
-            <div class="well">
-              <form class="form-inline" id="size">
-                <div class="form-group">
-                  <input type="text" name="x"
-                         class="form-control input-sm" placeholder="横幅">
-                </div> <!-- END: form-group -->
-                ×
-                <div class="form-group">
-                  <input type="text" name="y"
-                         class="form-control input-sm" placeholder="縦幅">
-                </div> <!-- END: form-group -->
-                <button class="btn btn-primary" type="submit">
-                  シート生成
-                </button>
-              </form> <!-- END: size -->
-              <ul style="display:none;" id="size_error">
-                <li>
-                  <p class="text-danger">
+
+          <div class="col-lg-2-offset col-lg-4 pull-right">
+            <div class="row">
+              <div class="col-lg-12 well">
+                <form class="form-inline pull-right" id="size">
+                  <div class="form-group">
+                    <input type="text" name="x" autofocus
+                           autocomplete="off"
+                           class="form-control input-sm" size="2"
+                           placeholder="横幅">
+                  </div> <!-- END: form-group -->
+                  ×
+                  <div class="form-group">
+                    <input type="text" name="y" autocomplete="off"
+                           class="form-control input-sm" size="2"
+                           placeholder="縦幅">
+                  </div> <!-- END: form-group -->
+                  <button class="btn btn-primary btn-sm" type="submit">
+                    生成
+                  </button>
+                </form> <!-- END: size -->
+                <div style="display:none;" id="size_error">
+                  <p class="text-danger" name="message">
                     <b>1</b> 以上の数値を入力してください
                   </p>
-                </li>
-              </ul> <!-- EMD:  -->
-            </div> <!-- END: well -->
+                </div>
+
+                <div style="display:none;" id="sheet_generated">
+                  <p class="text-danger" name="message">
+                    既にシートが生成されています
+                  </p>
+                </div>
+
+                <div id="answerInvisibleError" style="display:none;">
+                  <p class="text-danger" name="message">
+                    答えを生成してください
+                  </p>
+                </div>
+
+              </div> <!-- END: col-lg-12 -->
+            </div> <!-- END: row -->
+
+            <div class="row">
+              <div class="col-lg-12 well">
+                <form class="form-inline pull-right" id="answerForm">
+
+                  <div class="form-group">
+                    <input type="text" name="length" autocomplete="off"
+                           class="form-control input-sm"
+                           placeholder="答えの文字数">
+                  </div> <!-- END: length -->
+                  <button class="btn btn-primary btn-sm" type="submit">
+                    生成
+                  </button>
+                </form>
+
+                <div id="answer_error" style="display:none;">
+                  <p name="message" class="text-danger">
+                    <b>1</b> 以上の整数を入力してください
+                  </p>
+                </div>
+
+                <div id="answerAlreadyExistsError" style="display:none;">
+                  <p name="message" class="text-danger">
+                    既に生成済みです
+                  </p>
+                </div> <!-- END:  -->
+              </div> <!-- END: col-lg-12 well -->
+            </div> <!-- END: row -->
+
           </div> <!-- END: col-lg-6 -->
         </div> <!-- END: row -->
       </div> <!-- END: page-header -->
 
       <div class="row">
-        <div class="col-lg-12">
-          <table class="table table-striped table-hover hidden" name="sheet" >
-            <tbody>
-              <tr>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </div> <!-- END: col-lg-12 -->
+        <form id="answer" class="form-inline" style="display:none;">
+          <div class="col-lg-12">
+            <table class="table table-condensed table-bordered table-sheet"
+                   style="width:0%;">
+              <tbody>
+                <tr>
+                  <td id="answerConvert">
+                    <button class="btn btn-sm btn-primary" type="submit">
+                      変換
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div> <!-- END: col-lg-12 -->
+        </form>
+      </div> <!-- END: row -->
+
+      <div class="row">
+        <div style="display:none;"
+             class="col-lg-4 well" id="notAllNumberError">
+          <ul>
+            <li>
+              <p class="text-danger" name="message">
+                全てのマスに数値を入力してください
+              </p>
+            </li>
+          </ul> <!-- EMD:  -->
+        </div> <!-- END: col-lg-4 -->
+      </div> <!-- END: row -->
+
+      <!-- END: Answer Table -->
+
+      <hr>
+
+      <div class="row">
+        <form id="sheet" style="display:none;" class="form-inline">
+          <div class="col-lg-12">
+            <table class="table table-striped table-condensed table-bordered
+                   table-sheet center-table"
+                   style="width:0%">
+              <tbody></tbody>
+            </table>
+          </div> <!-- END: col-lg-12 -->
+          <div class="row">
+            <div class="col-lg-12 text-center">
+              <br>
+              <button class="btn btn-primary" type="submit">
+                変換
+              </button>
+            </div> <!-- END: col-lg-12 -->
+          </div> <!-- END: row -->
+        </form>
       </div> <!-- END: row -->
 
     </div> <!-- END: container -->
@@ -100,6 +192,11 @@
     <script type="text/javascript" src="./js/jquery.min.js"></script>
     <script type="text/javascript" src="./js/bootstrap.min.js"></script>
     <script type="text/javascript" src="./js/bootswatch.js"></script>
+    <script type="text/javascript" src="./js/respond.min.js"></script>
+    <script type="text/javascript" src="./js/jquery.validate.js"></script>
+    <script type="text/javascript" src="./js/bililiteRange.js"></script>
+    <script type="text/javascript" src="./js/jquery.sendkeys.js"></script>
     <script type="text/javascript" src="./js/numcro.js"></script>
+    <script type="text/javascript" src="./js/sheet.js"></script>
   </body>
 </html>
