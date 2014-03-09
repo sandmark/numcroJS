@@ -142,6 +142,7 @@ $ ->
       if code is keyEnter
         $(":input:eq(#{$(':input').index(this)+1})").focus()
         false
+    $(this)
 
   # --------------------------------------------------
   # Function: convert
@@ -160,6 +161,7 @@ $ ->
       else
         input = "<input placeholder='#{n}' type='text' autocomplete='off' class='text-center'>"
         e.replaceWith(input)
+    $(this)
 
   # --------------------------------------------------
   # Override submit of Base answer table
@@ -192,3 +194,4 @@ $ ->
   #   Synchronize characters in same numbers
   #
   $.fn.registerSync = ->
+    $(this).find("input").change ->

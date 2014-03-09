@@ -124,7 +124,7 @@ $(function() {
     return false;
   };
   $.fn.registerKeys = function() {
-    return $(this).find("input").keypress(function(e) {
+    $(this).find("input").keypress(function(e) {
       var code, keyEnter;
       keyEnter = 13;
       code = e.keyCode || e.which;
@@ -133,9 +133,10 @@ $(function() {
         return false;
       }
     });
+    return $(this);
   };
   $.fn.convert = function() {
-    return $(this).find("input").each(function() {
+    $(this).find("input").each(function() {
       var e, height, input, n, width;
       e = $(this);
       n = Number(e.val());
@@ -150,6 +151,7 @@ $(function() {
         return e.replaceWith(input);
       }
     });
+    return $(this);
   };
   $("#answer").submit(function() {
     var error, invalidCell;
@@ -174,5 +176,7 @@ $(function() {
     $(this).find("button").hide("slow").end().convert().registerKeys().registerSync();
     return false;
   });
-  return $.fn.registerSync = function() {};
+  return $.fn.registerSync = function() {
+    return $(this).find("input").change(function() {});
+  };
 });
