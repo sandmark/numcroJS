@@ -171,8 +171,8 @@ $ ->
         allNumber = false
     if allNumber
       error.hide("fast")
-      $(this).find("button").parent().remove().end().convert().
-        registerKeys().registerSync()
+      $(this).find("button").parent().remove()
+      $(this).convert().registerKeys().registerSync()
     else
       error.showError()
     false
