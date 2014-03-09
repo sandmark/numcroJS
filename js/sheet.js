@@ -113,11 +113,11 @@ $(function() {
       }, "slow", function() {
         if (!$("#answer").isVisible()) {
           $("#answerInvisibleError").showError();
-          return $("#answerForm").find("input")[0].focus();
+          $("#answerForm").find("input")[0].focus();
         } else {
           $(this).find("input")[0].focus();
-          return sheet.registerKeys();
         }
+        return sheet.registerKeys();
       });
     }
     return false;

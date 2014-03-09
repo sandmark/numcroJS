@@ -127,7 +127,7 @@ $ ->
           $("#answerForm").find("input")[0].focus()
         else
           $(this).find("input")[0].focus()
-          sheet.registerKeys()
+        sheet.registerKeys()
     false
 
   # --------------------------------------------------
