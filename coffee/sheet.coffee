@@ -77,7 +77,8 @@ $ ->
     else
       $("#answerInvisibleError").hide("slow")
       tr = answer.find("tr")
-      for i in [0..$(this).find("input[name=length]").val()]
+      len = $(this).find("input[name=length]").val()
+      for i in [1..len] by 1
         input = $("<input type='text' autocomplete='off' class='text-center'>")
         td    = $("<td class='text-center'>")
         td.append(input)

@@ -56,14 +56,15 @@ $(function() {
     }
   });
   $.fn.createAnswer = function() {
-    var answer, i, input, td, tr, _i, _ref;
+    var answer, i, input, len, td, tr, _i;
     answer = $("#answer");
     if (answer.find("input").length > 0) {
       $("#answerAlreadyExistsError").showError();
     } else {
       $("#answerInvisibleError").hide("slow");
       tr = answer.find("tr");
-      for (i = _i = 0, _ref = $(this).find("input[name=length]").val(); 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) {
+      len = $(this).find("input[name=length]").val();
+      for (i = _i = 1; _i <= len; i = _i += 1) {
         input = $("<input type='text' autocomplete='off' class='text-center'>");
         td = $("<td class='text-center'>");
         td.append(input);
