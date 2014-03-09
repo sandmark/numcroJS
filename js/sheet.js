@@ -150,6 +150,23 @@ $(function() {
       }
     });
   };
+  $("#answer").submit(function() {
+    var allNumber, error;
+    allNumber = true;
+    error = $("#notAllNumberError");
+    $(this).find("input").each(function() {
+      if (!($(this).val() > 0 && allNumber)) {
+        return allNumber = false;
+      }
+    });
+    if (allNumber) {
+      error.hide("fast");
+      $(this).find("button").parent().remove().end().convert().registerKeys().registerSync();
+    } else {
+      error.showError();
+    }
+    return false;
+  });
   $("#sheet").submit(function() {
     $(this).find("button").hide("slow").end().convert().registerKeys().registerSync();
     return false;

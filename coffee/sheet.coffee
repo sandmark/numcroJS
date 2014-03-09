@@ -161,6 +161,23 @@ $ ->
         e.replaceWith(input)
 
   # --------------------------------------------------
+  # Override submit of Base answer table
+  #
+  $("#answer").submit ->
+    allNumber = true
+    error = $("#notAllNumberError")
+    $(this).find("input").each ->
+      unless $(this).val() > 0 and allNumber
+        allNumber = false
+    if allNumber
+      error.hide("fast")
+      $(this).find("button").parent().remove().end().convert().
+        registerKeys().registerSync()
+    else
+      error.showError()
+    false
+
+  # --------------------------------------------------
   # Override submit of Base sheet
   #
   $("#sheet").submit ->
