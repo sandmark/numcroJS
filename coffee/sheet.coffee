@@ -201,7 +201,7 @@ $ ->
     elements.change ->
       n = $(this).attr("placeholder")
       char = $(this).val()
-      for cell in target.find("input[placeholder=#{n}]")
-        $(cell).sendkeys(char) if $(cell).val() is ""
+      target.find("input[placeholder=#{n}]")
+        .sendkeys("{selectall}{del}").sendkeys(char)
       $(this).focus()
     $(this)
