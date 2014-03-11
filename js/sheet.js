@@ -183,16 +183,10 @@ $(function() {
     elements = $(this).find("input");
     target = $("#answer,#sheet");
     elements.change(function() {
-      var cell, char, n, _i, _len, _ref;
+      var char, n;
       n = $(this).attr("placeholder");
       char = $(this).val();
-      _ref = target.find("input[placeholder=" + n + "]");
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        cell = _ref[_i];
-        if ($(cell).val() === "") {
-          $(cell).sendkeys(char);
-        }
-      }
+      target.find("input[placeholder=" + n + "]").sendkeys("{selectall}{del}").sendkeys(char);
       return $(this).focus();
     });
     return $(this);
