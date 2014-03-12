@@ -15,3 +15,11 @@
 .table-sheet td.cell-block {
     background-color: #000000 !important;
 }
+
+.focusedInput {
+    border-color: rgba(82,168,236,.4);
+    outline: 0;
+    outline: thin dotted \9;
+    -moz-box-shadow: 0 0 8px rgba(82,168,236,.6);
+    box-shadow: 0 0 8px rgba(82,168,236,.6) !important;
+}
