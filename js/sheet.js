@@ -166,7 +166,7 @@ $(function() {
     if (!invalidCell) {
       error.hide("fast");
       $(this).find("button").parent().remove();
-      $(this).convert().registerKeys().registerSync();
+      $(this).convert().registerKeys().registerSync().highlightSameNumbers();
       $("#sheet").find("input")[0].focus();
     } else {
       invalidCell.focus();
@@ -175,10 +175,10 @@ $(function() {
     return false;
   });
   $("#sheet").submit(function() {
-    $(this).find("button").hide("slow").end().convert().registerKeys().registerSync().find("input")[0].focus();
+    $(this).find("button").hide("slow").end().convert().registerKeys().registerSync().highlightSameNumbers().find("input")[0].focus();
     return false;
   });
-  return $.fn.registerSync = function() {
+  $.fn.registerSync = function() {
     var elements, target;
     elements = $(this).find("input");
     target = $("#answer,#sheet");
@@ -188,6 +188,19 @@ $(function() {
       char = $(this).val();
       target.find("input[placeholder=" + n + "]").sendkeys("{selectall}{del}").sendkeys(char);
       return $(this).focus();
+    });
+    return $(this);
+  };
+  return $.fn.highlightSameNumbers = function() {
+    var target;
+    target = $("#answer,#sheet");
+    target.find("input").focus(function() {
+      var n;
+      n = $(this).attr("placeholder");
+      return target.find("[placeholder=" + n + "]").addClass("focusedInput");
+    });
+    target.find("input").focusout(function() {
+      return target.find("input").removeClass("focusedInput");
     });
     return $(this);
   };
