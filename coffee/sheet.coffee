@@ -176,7 +176,7 @@ $ ->
     if not invalidCell
       error.hide("fast")
       $(this).find("button").parent().remove()
-      $(this).convert().registerKeys().registerSync()
+      $(this).convert().registerKeys().registerSync().highlightSameNumbers()
       $("#sheet").find("input")[0].focus()
     else
       invalidCell.focus()
@@ -188,7 +188,8 @@ $ ->
   #
   $("#sheet").submit ->
     $(this).find("button").hide("slow").end().convert().
-      registerKeys().registerSync().find("input")[0].focus()
+      registerKeys().registerSync().highlightSameNumbers()
+        .find("input")[0].focus()
     false
 
   # --------------------------------------------------
@@ -204,4 +205,17 @@ $ ->
       target.find("input[placeholder=#{n}]")
         .sendkeys("{selectall}{del}").sendkeys(char)
       $(this).focus()
+    $(this)
+
+  # --------------------------------------------------
+  # Function: highlightSameNumbers
+  #   Handling Focus event to highlight boxes
+  #
+  $.fn.highlightSameNumbers = ->
+    target = $("#answer,#sheet")
+    target.find("input").focus ->
+      n = $(this).attr("placeholder")
+      target.find("[placeholder=#{n}]").addClass("focusedInput")
+    target.find("input").focusout ->
+      target.find("input").removeClass("focusedInput")
     $(this)
